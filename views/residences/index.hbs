@@ -1,0 +1,31 @@
+<section class="main main-text-wrapper">
+  <div class="main__wrapper-purple padding-left padding-right">
+    <h1 class="main__wrapper-purple__text"><i class="fa fa-search" aria-hidden="true"></i> Residences directory</h1>
+  </div>
+  <div class="main__wrapper main__negative-top-margin" style="border:1px solid #344e86;">
+    <table class="padding-left padding-right padding-bottom">
+      <caption class="padding-top">Residences directory</caption>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">City</th>
+        <th scope="col">Province</th>
+      </tr>
+      {{#each residences as |residence|}}
+      <tr>
+        <th scope="row"><a href="/residences/{{slug}}?ref=search" class="main__wrapper__link">{{name}}</a></th>
+        <td>{{address_city}}</td>
+        <td>{{address_state}}</td>
+      </tr>
+      {{/each}}
+    </table>
+  </div>
+  {{#if page}}
+  <a href="/residences?page={{page.prevPage}}" class="main__wrapper__link">Previous</a>
+  <a href="/residences?page={{page.nextPage}}" class="main__wrapper__link">Next</a>
+  {{/if}}
+</section>
+{{!-- <div class="list-group">
+  {{#each residences as |residence|}}
+  <a href="/residences/{{id}}" class="list-group-item list-group-item-action">{{name}}</a>
+  {{/each}}
+</div> --}}

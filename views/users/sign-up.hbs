@@ -1,0 +1,37 @@
+<section class="main main-text-wrapper">
+  <div class="main__wrapper-purple padding-left padding-right">
+    <h1 class="main__wrapper-purple__text">Create your free account
+    </h1>
+  </div>
+  <div class="main__wrapper main__negative-top-margin">
+    <div class="padding-left padding-right padding-top padding-bottom">
+      <form action="/users/signup" method="POST">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <div class="field">
+          <label class="label" for="username">Username</label>
+          <div class="input-wrapper">
+            <input id="username" name="username" type="text" class="input" required spellcheck="false"
+              autocomplete="off">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="email">Email</label>
+          <div class="input-wrapper">
+            <input id="email" name="email" type="email" class="input" required spellcheck="false" autocomplete="off">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="password">Password</label>
+          <div class="input-wrapper">
+            <input id="password" name="password" type="password" class="input" required spellcheck="false"
+              autocomplete="off">
+          </div>
+        </div>
+        <button class="button is-primary full-width" type="submit">Create account <i class="fa fa-sign-in-alt"
+            aria-hidden="true"></i></button>
+      </form>
+      <p>By registering, you agree to the <a href="/privacy?ref=signup" class="main__wrapper__link">privacy policy</a>
+        and <a href="/tos?ref=signup" class="main__wrapper__link">terms of service</a>.</p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,21 @@
+<section class="main main-text-wrapper">
+  <div class="main__wrapper-purple padding-left padding-right">
+    <h1 class="main__wrapper-purple__text">Reset password</h1>
+  </div>
+  <div class="main__wrapper main__negative-top-margin">
+    <div class="padding-left padding-right padding-top padding-bottom">
+      <form action="/users/forgot" method="POST">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <div class="field">
+          <label class="label" for="email">Email</label>
+          <div class="input-wrapper">
+            <input id="email" name="email" type="email" class="input" required spellcheck="false" autocomplete="off">
+            <p class="help">If the email exists, we will reset your password and send an email with instructions for
+              creating a new password.</p>
+          </div>
+        </div>
+        <button class="button is-primary full-width" type="submit">Reset password</button>
+      </form>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,146 @@
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+  crossorigin="" />
+<script src="/javascripts/leaflet/leaflet.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" crossorigin="" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css"
+  crossorigin="" />
+<script src="/javascripts/leaflet-markercluster/leaflet.markercluster.js" crossorigin=""></script>
+<script src="/javascripts/fuse/fuse.min.js"></script>
+<link rel="stylesheet" href="/javascripts/leaflet-fusesearch/leaflet.fusesearch.css" />
+<script src="/javascripts/leaflet-fusesearch/leaflet.fusesearch.js" crossorigin=""></script>
+
+<section class="main main-text-wrapper" style="padding-bottom:0">
+  <div class="main__wrapper-purple padding-left padding-right">
+    <h1 class="main__wrapper-purple__text">
+      Explore senior care residences near you
+    </h1>
+  </div>
+  {{#if residences}}
+  <div class="main__wrapper main__negative-top-margin" style="max-width:964px;border:1px solid #344e86;">
+    <div class="padding-left padding-right">
+      <h3 style="display:flex;align-items:center;"><i class="fas fa-address-card fa__mod"
+          aria-hidden="true"></i>&nbsp;Recently updated residences</h3>
+      <ul class="main__wrapper__list">
+        {{#each residences as |residence|}}
+        <li class="main__wrapper__list__item"><a class="main__wrapper__link"
+            href="/residences/{{slug}}?ref=recently_updated">{{name}}</a><br><em>{{address_city}},
+            {{address_state}}</em>
+        </li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+  {{/if}}
+  <div class="main__wrapper-main-map" style="border-radius:5px;max-width:964px;border:1px solid #344e86;">
+    <div class="padding-left padding-right">
+      <p class="main__text-small"><i class="fa fa-info-circle" aria-hidden="true"></i> Drag around the map to find
+        elderly care residences in your region.</p>
+    </div>
+    <div class="main__wrapper-main-map-with-filter">
+      <div class="main__wrapper-main-map-with-filter__wrapper">
+        <small><strong>Filter by Province</strong></small>
+        <ul class="main__wrapper__list-filter">
+          <li class="main__wrapper__list__item-filter"><button class="main__wrapper__list__item-filter__button"
+              type="button" name="jump-to-BC">BC</button></li>
+          <li class="main__wrapper__list__item-filter"><button class="main__wrapper__list__item-filter__button"
+              type="button" name="jump-to-AB">AB</button></li>
+          <li class="main__wrapper__list__item-filter"><button class="main__wrapper__list__item-filter__button"
+              type="button" name="jump-to-SK">SK</button></li>
+          <li class="main__wrapper__list__item-filter"><button class="main__wrapper__list__item-filter__button"
+              type="button" name="jump-to-MB">MB</button></li>
+          <li class="main__wrapper__list__item-filter"><button class="main__wrapper__list__item-filter__button"
+              type="button" name="jump-to-ON">ON</button></li>
+          <li class="main__wrapper__list__item-filter"><button class="main__wrapper__list__item-filter__button"
+              type="button" name="jump-to-QC">QC</button></li>
+          <li class="main__wrapper__list__item-filter"><button class="main__wrapper__list__item-filter__button"
+              type="button" name="jump-to-NB">NB</button></li>
+          <li class="main__wrapper__list__item-filter"><button class="main__wrapper__list__item-filter__button"
+              type="button" name="jump-to-PEI">PEI</button></li>
+          <li class="main__wrapper__list__item-filter"><button class="main__wrapper__list__item-filter__button"
+              type="button" name="jump-to-NS">NS</button></li>
+          <li class="main__wrapper__list__item-filter"><button class="main__wrapper__list__item-filter__button"
+              type="button" name="jump-to-NL">NL</button></li>
+        </ul>
+      </div>
+      <div id="map" class="map main__wrapper-main-map-with-filter" style="width:100%;">
+        <script type="text/javascript"> ! function (e) {
+            L.tileLayer("https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png", {
+              attribution: `&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors, &copy; <a
+            href="https://carto.com/attribution" > CARTO</a> `
+            }).addTo(e), document.addEventListener("DOMContentLoaded", function () {
+              try {
+                let a = fetch('/residences/api')
+                  .then(result => result.json())
+                  .then(data => {
+                    const t = L.geoJSON(data, {
+                      pointToLayer: function (e, t) {
+                        return L.marker(t)
+                      },
+                      onEachFeature: function (e, t) {
+                        e.layer = t;
+                        t.bindPopup("<div><h3>" + e.properties.name + "</h3><span>" + `<i class="fa fa-map-marker fa__mod" aria-hidden="true"></i>&nbsp;` + e.properties.address + '</span><br><a href="/residences/' + e.properties.slug + '?ref=home_map_popup">View details</a></div>');
+                      }
+                    });
+                    var n = L.markerClusterGroup({
+                      chunkedLoading: !0,
+                      showCoverageOnHover: !1
+                    });
+
+                    n.addLayer(t);
+                    e.addLayer(n);
+
+                    const i = { _map: e, position: "topleft", title: "Search", panelTitle: "", placeholder: "Search", caseSensitive: !1, threshold: .5, maxResultLength: null, showResultFct: null, showInvisibleFeatures: !0 }; var o = L.control.fuseSearch(i); o.indexFeatures(data, ["name", "address"]), e.addControl(o)
+                  });
+                document.getElementsByName("jump-to-QC")[0].addEventListener("click", function () {
+                  e.setView([45.593, -73.504], 7)
+                }), document.getElementsByName("jump-to-ON")[0].addEventListener("click", function () {
+                  e.setView([43.606, -79.843], 7)
+                }), document.getElementsByName("jump-to-NB")[0].addEventListener("click", function () {
+                  e.setView([46.61, -65.945], 7)
+                }), document.getElementsByName("jump-to-NS")[0].addEventListener("click", function () {
+                  e.setView([45.056, -63.397], 7)
+                }), document.getElementsByName("jump-to-PEI")[0].addEventListener("click", function () {
+                  e.setView([46.288, -63.419], 7)
+                }), document.getElementsByName("jump-to-NL")[0].addEventListener("click", function () {
+                  e.setView([47.475, -52.85], 6)
+                }), document.getElementsByName("jump-to-MB")[0].addEventListener("click", function () {
+                  e.setView([51.382, -98.811], 7)
+                }), document.getElementsByName("jump-to-SK")[0].addEventListener("click", function () {
+                  e.setView([51.669, -106.622], 7)
+                }), document.getElementsByName("jump-to-AB")[0].addEventListener("click", function () {
+                  e.setView([53.55, -113.994], 6)
+                }), document.getElementsByName("jump-to-BC")[0].addEventListener("click", function () {
+                  e.setView([53.403, -126.387], 5)
+                });
+
+              } catch (t) {
+                let n = L.marker([43.6426, -79.3871]).addTo(e);
+                e.setView([43.6426, -79.3871], 13), n.bindPopup(`Oops, looks like we had a problem loading the map
+          =(<br><strong>But,
+            do not worry!</strong><br>You can still <a href="/search?ref=home_map_popup_failed"
+            class="main__wrapper__link">Search</a> or <a href="/search?ref=home_map_popup_failed"
+            class="main__wrapper__link">Switch to list view</a>.`).openPopup()
+                console.error(`error : `, t);
+              }
+            })
+          }(L.map("map", {
+            scrollWheelZoom: !1
+          }).setView([45.416191, -75.691727], 5));
+        </script>
+      </div>
+    </div>
+    <div style="display:flex; align-items:center; padding:1em;">
+      <h3 style="padding-right:1em;">Not a fan of maps? <i class="fa fa-arrow-circle-right" aria-hidden="true"
+          style="padding-left:0.5em"></i></h3>
+      <a href="/residences?ref=main_page" style="flex-grow:1" class="button
+      is-primary button__wrapper__a-remove-underline">View directory</a>
+    </div>
+  </div>
+  <div class="main__wrapper-main-map padding-left padding-right"
+    style="flex-direction: row; justify-content: space-around; align-items: center; margin-bottom:0;">
+    <h2>Are we missing a residence?</h2>
+    <a href="/residences/suggest-new?ref=main-page" class="button button__wrapper__a-remove-underline"
+      aria-label="Add a missing residence" title="Add a Residence">Suggest a missing residence</a>
+  </div>
+</section>

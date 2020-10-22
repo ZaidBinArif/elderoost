@@ -1,0 +1,88 @@
+<section class="main main-text-wrapper">
+  <div class="main__wrapper-purple padding-left padding-right">
+    <h1 class="main__wrapper-purple__text">Suggest New Residence</a>
+    </h1>
+  </div>
+  <div class="main__wrapper main__negative-top-margin">
+    <div class="padding-left padding-right padding-top padding-bottom">
+      <form action="/residences/suggest-new" method="POST">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <div class="field">
+          <label class="label" for="name">Residence Name</label>
+          <div class="input-wrapper">
+            <input id="name" name="name" type="text" class="input" required spellcheck="false" autocomplete="off"
+              placeholder="Garry J. Armstrong Home">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="address">Address</label>
+          <div class="input-wrapper">
+            <input id="address" name="address" type="text" class="input" required spellcheck="false" autocomplete="off"
+              placeholder="200 Island Lodge Road, Ottawa, Ontario, K1N 5M2, Canada">
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="main__wrapper">
+    <div class="padding-left padding-right padding-top padding-bottom">
+      <p>
+        <h2 style="text-align:center; font-weight:100;"><i class="fa fa-arrow-down" aria-hidden="true"></i> Please
+          confirm the
+          address
+          below <i class="fa fa-arrow-down" aria-hidden="true"></i></h2>
+      </p>
+    </div>
+  </div>
+  <div class="main__wrapper">
+    <div class="padding-left padding-right padding-top padding-bottom">
+      <div class="field">
+        <label for="address_num" class="label">Street Number</label>
+        <div class="input-wrapper">
+          <input id="address_num" name="address_num" type="number" class="input" required spellcheck="false"
+            autocomplete="false" placeholder="200">
+        </div>
+      </div>
+      <div class="field">
+        <label for="address_street" class="label">Street</label>
+        <div class="input-wrapper">
+          <input id="address_street" name="address_street" type="text" class="input" required spellcheck="false"
+            autocomplete="false" placeholder="Island Lodge Road">
+        </div>
+      </div>
+      <div class="field">
+        <label for="address_city" class="label">City</label>
+        <div class="input-wrapper">
+          <input id="address_city" name="address_city" type="text" class="input" required spellcheck="false"
+            autocomplete="false" placeholder="Ottawa">
+        </div>
+      </div>
+      <div class="field">
+        <label for="address_state" class="label">Province/State</label>
+        <div class="input-wrapper">
+          <input id="address_state" name="address_state" type="text" class="input" required placeholder="Ontario">
+        </div>
+      </div>
+      <div class="field">
+        <label for="postal_code" class="label">Postal Code/Zip code</label>
+        <div class="input-wrapper">
+          <input id="postal_code" name="postal_code" type="text" class="input" required placeholder="K1N 5M2">
+        </div>
+      </div>
+      <div class="field">
+        <label for="address_country" class="label">Country</label>
+        <div class="input-wrapper">
+          <input id="address_country" name="address_country" type="text" class="input" required placeholder="Canada">
+        </div>
+      </div>
+      <button class="button is-primary full-width" type="submit">Save <i class="fa fa-save"
+          aria-hidden="true"></i></button>
+      <p>
+        <small>By sending your submission, you agree to the <a href="/privacy?ref=new-article"
+            class="main__wrapper__link" target="_blank">privacy policy</a> and <a href="/tos?ref=new-article"
+            class="main__wrapper__link" target="_blank">terms of
+            service</a>.</small>
+      </p>
+      </form>
+    </div>
+  </div>
+</section>

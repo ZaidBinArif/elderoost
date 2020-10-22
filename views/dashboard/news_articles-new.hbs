@@ -1,0 +1,52 @@
+<section class="main main-text-wrapper">
+  <div class="main__wrapper-purple padding-left padding-right">
+    <h1 class="main__wrapper-purple__text">New Article</a>
+    </h1>
+  </div>
+  <div class="main__wrapper main__negative-top-margin">
+    <div class="padding-left padding-right padding-top padding-bottom">
+      <form action="/dashboard/residences/{{residence.slug}}/news_articles/new" method="POST">
+        <div class="field">
+          <label class="label" for="author_names">Authors</label>
+          <div class="input-wrapper">
+            <input id="author_names" name="author_names" type="text" class="input" required spellcheck="false"
+              autocomplete="off" placeholder="A. Kluew">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="headline">Headline</label>
+          <div class="input-wrapper">
+            <input id="headline" name="headline" type="text" class="input" required spellcheck="false"
+              autocomplete="off" placeholder="Province working on solution to bed closures at Atlantic Baptist Home">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="publisher">Publisher</label>
+          <div class="input-wrapper">
+            <input id="publisher" name="publisher" type="text" class="input" required spellcheck="false"
+              autocomplete="off" placeholder="CBC News">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="url">URL</label>
+          <div class="input-wrapper">
+            <input id="url" name="url" type="text" class="input" required spellcheck="false" autocomplete="off"
+              placeholder="http://www.cbc.ca/news/canada/prince-edward-island/pei-atlantic-baptist-home-bed-reduction-1.4313402">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="status">Status</label>
+          <div class="input-wrapper">
+            <input id="status" name="status" type="text" class="input" required spellcheck="false" autocomplete="off"
+              value="pending">
+            <p class="help">confirmed, pending</p>
+          </div>
+        </div>
+        <input id="residence_id" name="residence_id" type="hidden" required spellcheck="false" autocomplete="off"
+          value="{{residence.slug}}">
+        <button class="button is-primary full-width" type="submit">Save <i class="fa fa-save"
+            aria-hidden="true"></i></button>
+      </form>
+    </div>
+  </div>
+</section>

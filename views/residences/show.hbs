@@ -1,0 +1,245 @@
+<section class="main main-text-wrapper" itemscope itemtype="http://schema.org/Residence">
+  <div class="main__wrapper-purple padding-left padding-right">
+    <meta itemprop="sameAs" content="/residences/{{residence.slug}}" />
+    <div class="main__wrapper-purple__content">
+      <h1 class="main__wrapper-purple__text"><i class="fa fa-home" aria-hidden="true"></i> <span
+          itemprop="name">{{residence.name}}</span> Reviews</h1>
+      <small class="padding-bottom" itemscope itemtype="http://schema.org/BreadcrumbList"><span
+          itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item"
+            href="/residences/by-province/{{residence.address_state_slug}}?ref=residence_info"
+            class="main__infobox__link"><span itemprop="name">{{residence.address_state }}</span>
+            <meta itemprop="position" content="1" /></a></span><i class="fa fa-angle-right" aria-hidden="true"
+          style="margin-left: 0.5em;margin-right:0.5em"></i><span itemprop="itemListElement" itemscope
+          itemtype="http://schema.org/ListItem"><a itemprop="item"
+            href="/residences/by-city/{{residence.address_city_slug}}?ref=residence_info"
+            class="main__infobox__link"><span itemprop="name">{{residence.address_city}}</span>
+            <meta itemprop="position" content="2" /></a></span>
+      </small>
+    </div>
+  </div>
+  <div class="main__wrapper--map main__negative-top-margin" style="border:1px solid #344e86;">
+    <div id="map" class="main__wrapper--map__map">
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin="" />
+      <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+      <script>
+        (function loadata(map) {
+          var marker = undefined;
+          L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attribution">CARTO</a>'
+          }).addTo(map);
+          marker = L.marker([{{ residence.latitude }}, {{ residence.longitude }}]).addTo(map);
+    }) (L.map('map', { zoomControl: false, scrollWheelZoom: false }).setView([{{ residence.latitude }}, {{ residence.longitude }}], 14));
+      </script>
+    </div>
+    <div class="main__wrapper--map__side">
+      <span class="main__wrapper--map__side__title">{{residence.name}}</span>
+      <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+        <i class="fa fa-map-marker fa__mod" aria-hidden="true"></i>&nbsp;<span itemprop="streetAddress">
+          {{residence.address_num}}&nbsp;{{residence.address_street}}
+        </span>&nbsp;<br><span itemprop="addressLocality">{{residence.address_city}}</span>&nbsp;<span
+          itemprop="addressRegion">{{residence.address_state}}</span>&nbsp;<span
+          itemprop="postalCode">{{residence.postal_code}}</span><br>Canada
+      </div>
+      <span itemprop="hasMap"
+        content="http://maps.google.com/maps?daddr={{residence.latitude}},{{residence.longitude}}"><a
+          href="http://maps.google.com/maps?daddr={{residence.latitude}},{{residence.longitude}}"
+          class="main__wrapper__link" rel="nofollow" target="_blank">Get directions<i class="fa fa-external-link"
+            aria-hidden="true"></i></a></span>
+      <div itemprop="geo" itemscope itemtype="http://schema.org/GeoCoordinates">
+        <meta itemprop="latitude" content="{{residence.latitude}}" />
+        <meta itemprop="longitude" content="{{residence.longitude}}" />
+      </div>
+    </div>
+  </div>
+  {{#if newsArticles}}
+  <div class="main__wrapper" style="border:1px solid #344e86;">
+    <div class="padding-left padding-right">
+      <h2 class="main__information-news__heading">In the news</h2>
+      <ul class="font_small">
+        {{#each newsArticles as |newsArticle|}}
+        <li>
+          {{author_names}}, <a class="main__wrapper__link" rel="nofollow" href="{{url}}"
+            target="_blank">"{{headline}}"<i class="fa fa-external-link" aria-hidden="true"></i></a>,
+          {{publisher}}
+        </li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+  {{/if}}
+  {{#if user}}
+  <div class="main__wrapper" style="border:1px solid #344e86;">
+    <div class="padding-left padding-right padding-top padding-bottom">
+      <h2 class=" main__information-news__heading">Suggest news article</h2>
+      <p>Are we missing a news article on {{residence.name}}? Please help us improve our data by submitting the form
+        below. Thank you for your contribution.</p>
+      <form action="/residences/{{residence.slug}}/news_articles/new" method="POST">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <div class="field">
+          <label class="label" for="author_names">Author(s)</label>
+          <div class="input-wrapper">
+            <input id="author_names" name="author_names" type="text" class="input" spellcheck="false" autocomplete="off"
+              placeholder="A. Kluew, E. Smith">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="headline">Headline</label>
+          <div class="input-wrapper">
+            <input id="headline" name="headline" type="text" class="input" required spellcheck="false"
+              autocomplete="off" placeholder="Province working on solution to bed closures at Atlantic Baptist Home">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="publisher">Publisher</label>
+          <div class="input-wrapper">
+            <input id="publisher" name="publisher" type="text" class="input" required spellcheck="false"
+              autocomplete="off" placeholder="CBC News">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="url">URL</label>
+          <div class="input-wrapper">
+            <input id="url" name="url" type="text" class="input" required spellcheck="false" autocomplete="off"
+              placeholder="http://www.cbc.ca/news/canada/prince-edward-island/pei-atlantic-baptist-home-bed-reduction-1.4313402">
+          </div>
+        </div>
+        <button class="button is-primary full-width" type="submit">Add news article <i class="fa fa-save"
+            aria-hidden="true"></i></button>
+        <p>
+          <small>By sending your submission, you agree to the <a href="/privacy?ref=new-article"
+              class="main__wrapper__link" target="_blank">privacy policy</a> and <a href="/tos?ref=new-article"
+              class="main__wrapper__link" target="_blank">terms of
+              service</a>.</small>
+        </p>
+      </form>
+    </div>
+  </div>
+  {{/if}}
+  {{#if complaint_message}}
+  <div class="main__infobox" style="border:1px solid #344e86;">
+    <div class="padding-left padding-right">
+      <h2>Did you know about the complaint process?</h2>
+      <p>
+        {{{complaint_message}}}
+      </p>
+    </div>
+  </div>
+  {{/if}}
+  {{#if reviews}}
+  <div class="main__wrapper" style="border:1px solid #344e86;">
+    <div class="padding-right padding-left">
+      <div class="individual-listing-reviews padding-left padding-right padding-bottom">
+        <h2 class="individual-listing-reviews__heading">Reviews</h2>
+        {{#each reviews as |review|}}
+        <article class="individual-listing-review padding-top" itemprop="review" itemscope
+          itemtype="http://schema.org/Review">
+          <div class="review-rating">
+            <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+              <meta itemprop="worstRating" content="1">
+              <meta itemprop="ratingValue" content="{{rating_value}}">
+              <meta itemprop="bestRating" content="5">
+              {{rating_value}}
+            </div>
+          </div>
+          <div class="review-name" itemprop="name">
+            <strong style="color: #111111">{{name}}</strong>
+            <small style="color: #555555; font-style: italic;">by <span itemprop="author" itemscope
+                itemtype="http://schema.org/Person"><span itemprop="author">{{author}}</span></span></small>
+          </div>
+          <div class="review-body" itemprop="description" style="color: #4a4a4a">
+            {{description}}
+          </div>
+        </article>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+  {{/if}}
+  {{#if user}}
+  <div class="main__wrapper" style="border:1px solid #344e86;">
+    <div class="padding-left padding-right padding-top padding-bottom">
+      <h2 class=" main__information-news__heading">Write a review</h2>
+      <p>Please remember that this review will be public. Therefore, please refrain from personal attacks and/or
+        identifiable information.</p>
+      <form action="/residences/{{residence.slug}}/reviews/new" method="POST">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <div class="field">
+          <label class="label" for="author">Author</label>
+          <div class="input-wrapper">
+            <input id="author" name="author" type="text" class="input" required spellcheck="false" autocomplete="off"
+              placeholder="Alex Kluew">
+            <p class="help">Name you want to appear next to the review</p>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="name">Review title</label>
+          <div class="input-wrapper">
+            <input id="name" name="name" type="text" class="input" required spellcheck="false" autocomplete="off"
+              placeholder="I recommend this residence">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="rating_value">Rating</label>
+          <div class="input-wrapper">
+            <input id="rating_value" name="rating_value" type="number" min="1.0" step="0.5" max="5.0" class="input"
+              required spellcheck="false" autocomplete="off" placeholder="5.0">
+            <p class="help">Please rate this residence from 1 to 5</p>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="description">Review</label>
+          <div class="input-wrapper">
+            <textarea id="description" name="description" class="textarea" required
+              placeholder="We have been using using this residence for my mom for the past 5 years. The staff are pleasant and knowledgeable. The environment has a lot of scheduled activities which keep my mom occupied. Staff speak Russian and this helps my mom as it is her native language. We haven't had any complaints and neither has my mom. Definitely would be a resident of this residence and we recommend it to everyone."></textarea>
+            <p class="help">How are the staff? the environment? would you recommend it? If you could reach out to the
+              staff, what would you like to see changed in the future? While we understand frustrations, please refrain
+              from personal attacks.</p>
+          </div>
+        </div>
+        <button class="button is-primary full-width" type="submit">Add review <i class="fa fa-save"
+            aria-hidden="true"></i></button>
+        <p>
+          <small>By sending your submission, you agree to the <a href="/privacy?ref=new-article"
+              class="main__wrapper__link" target="_blank">privacy policy</a> and <a href="/tos?ref=new-article"
+              class="main__wrapper__link" target="_blank">terms of
+              service</a>.</small>
+        </p>
+      </form>
+    </div>
+  </div>
+  {{/if}}
+  </div>
+  {{#if user}}
+  <div class="main__wrapper" style="border:1px solid #344e86;">
+    <div class="padding-left padding-right padding-top padding-bottom">
+      <div id="disqus_thread"></div>
+      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+          Disqus.</a></noscript>
+    </div>
+  </div>
+  {{/if}}
+</section>
+<div class="main__wrapper-main-map padding-left padding-right"
+  style="flex-direction: row; justify-content: space-around; align-items: center; margin-bottom:0;">
+  <h2>Are we missing a residence?</h2>
+  <a href="/residences/suggest-new?ref=show" class="button button__wrapper__a-remove-underline"
+    aria-label="Add a missing residence" title="Add a Residence">Suggest a missing residence</a>
+</div>
+{{#if user}}
+<script>
+  var disqus_config = function () {
+    this.page.url = "https://elderoostalpha.herokuapp.com/residences/{{residence.slug}}";
+    this.page.identifier = "{{residence.slug}}"
+  };
+  (function () { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://elderoost.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+{{/if}}

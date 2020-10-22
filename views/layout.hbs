@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>{{title}}</title>
+  <meta name="description" content="Changing the conversation when it comes to senior care." />
+  {{#if canonical}}
+  <link href="{{canonical}}" rel="canonical">
+  {{/if}}
+  <meta property="og:title" content="{{title}}" />
+  <meta property="og:url" content="https://elderoostalpha.herokuapp.com" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Elderoost" />
+  <meta property="og:description" content="Changing the conversation when it comes to elderly care." />
+  {{#if page_image}}
+  <meta name="og:image" content="{{page_image}}">
+  <meta itemprop="image" content="{{page_image}}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="{{page_image}}">
+  {{else}}
+  <meta name="twitter:card" content="summary">
+  {{/if}}
+  <meta name="twitter:site" content="@Elderoost">
+  <meta name="twitter:creator" content="@alexkluew">
+  <meta name="twitter:description" content="Changing the conversation when it comes to elderly care.">
+  <meta name="twitter:title" content="{{title}}">
+  <meta itemprop="name" content="{{title}}">
+  <meta itemprop="description" content="Changing the conversation when it comes to senior care.">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <script src="https://kit.fontawesome.com/b25d9bfb07.js" crossorigin="anonymous" async></script>
+  <meta name="apple-mobile-web-app-title" content="Elderoost">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+</head>
+
+<body>
+  <header class="header">
+    <nav class="navbar">
+      <div class="navbar__branding">
+        <span class="navbar__branding__title"><a href="/?ref=navbar"
+            class="navbar__branding__title__action">ELDEROOST</a></span>
+      </div>
+      <ul class="navbar__actions">
+        <li class="navbar__actions__list">
+          <a href="/residences?ref=nav" class="navbar__actions__list__item">
+            Explore
+          </a>
+        </li>
+        <li class="navbar__actions__list">
+          <a href="/about?ref=nav" class="navbar__actions__list__item">
+            About
+          </a>
+        </li>
+        <li class="navbar__actions__list">
+          <a href="/search?ref=nav" class="navbar__actions__list__item">
+            Search
+          </a>
+        </li>
+        {{#if user}}
+        {{#if user.is_admin}}
+        <li class="navbar__actions__list">
+          <a href="/dashboard?ref=nav" class="navbar__actions__list__item">
+            Dashboard
+          </a>
+        </li>
+        {{/if}}
+        <li class="navbar__actions__list">
+          <a href="/users/profile?ref=nav" class="navbar__actions__list__item">
+            Profile
+          </a>
+        </li>
+        <li class="navbar__actions__list">
+          <a href="/users/logout?ref=nav" class="navbar__actions__list__item">
+            Logout
+          </a>
+        </li>
+        {{else}}
+        <li>
+          <a href="/users/signin?ref=nav"
+            class="button reversed-is-primary navbar__actions__list__item-remove-underline" rel="nofollow"
+            aria-label="Support Elderoost via Patreon" title="Donate to Elderoost via Patreon">
+            Login
+          </a>
+        </li>
+        {{/if}}
+      </ul>
+    </nav>
+  </header>
+  {{{body}}}
+  <footer class="footer">
+    <div class="footer__interactions">
+
+      <ul class="footer__actions">
+        {{#if user}}
+        <li>
+          <a href="/users/logout?ref=footer" class="footer__actions__action" aria-label="Logout from Elderoost"
+            title="Logout from Elderoost">Logout</a>
+        </li>
+        {{else}}
+        <li>
+          <a href="/users/signin?ref=footer" class="footer__actions__action" aria-label="Login to Elderoost"
+            title="Login to Elderoost">Login</a>
+        </li>
+        {{/if}}
+        <li>
+          <a href="/about?ref=footer" class="footer__actions__action" aria-label="What is Elderoost?"
+            title="What is Elderoost?">What is Elderoost?</a>
+        </li>
+        <li>
+          <a href="/privacy?ref=footer" class="footer__actions__action" aria-label="Privacy Policy"
+            title="Privacy Policy">Privacy Policy</a>
+        </li>
+        <li>
+          <a href="/tos?ref=footer" class="footer__actions__action" aria-label="Terms of Use" title="Terms of Use">Terms
+            of Use</a>
+        </li>
+      </ul>
+    </div>
+    <div class="footer__interactions-secondary">
+      <div>
+        <span class="navbar__branding__title">ELDEROOST</span><small>© 2017-2020</small>
+      </div>
+      <div>
+        <ul class="footer__interactions-secondary__social">
+          <li class="footer__interactions-secondary__social__list">
+            <a href="https://twitter.com/Elderoost" class="footer__interactions-secondary__social__list__action"
+              target="_blank" aria-label="Follow us on Twitter" title="Follow us on Twitter"><i
+                class="fa fa-twitter-square" aria-hidden="true"></i></a>
+          </li>
+          <li class="footer__interactions-secondary__social__list">
+            <a href="https://instagram.com/Elderoost" class="footer__interactions-secondary__social__list__action"
+              target="_blank" aria-label="Follow us on Instagram" title="Follow us on Instagram"><i
+                class="fa fa-instagram" aria-hidden="true"></i></a>
+          </li>
+          <li>
+            <a href="https://www.facebook.com/Elderoost" class="footer__interactions-secondary__social__list__action"
+              target="_blank" aria-label="Follow us on Facebook" title="Follow us on Facebook"><i
+                class="fa fa-facebook-square" aria-hidden="true"></i></a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <small>Another <a href="https://getaclue.me" class="footer__interactions-secondary__social__list__action"
+            title="Go to Alex Kluew"><strong>getaclue</strong></a> Production</small>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

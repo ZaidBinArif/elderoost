@@ -1,0 +1,69 @@
+<section class="main main-text-wrapper">
+  <div class="main__wrapper-purple padding-left padding-right">
+    <h1 class="main__wrapper-purple__text">Editing <a href="/residences/{{review.residence.slug}}?ref=admin-edit"
+        class="main__infobox__link">{{review.residence.name}}</a> Review</a>
+    </h1>
+  </div>
+  <div class="main__wrapper main__negative-top-margin">
+    <div class="padding-left padding-right padding-top padding-bottom">
+      <p style="text-align:center;">
+        <a href="/dashboard/reviews/{{review.id}}/delete" class="button button__wrapper__a-remove-underline">Delete
+          Review</a>
+      </p>
+    </div>
+  </div>
+  <div class="main__wrapper">
+    <div class="padding-left padding-right padding-top padding-bottom">
+      <form action="/dashboard/reviews/{{review.id}}" method="POST">
+        <div class="field">
+          <label class="label" for="author">Author</label>
+          <div class="input-wrapper">
+            <input id="author" name="author" type="text" class="input" required spellcheck="false" autocomplete="off"
+              value="{{review.author}}">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="author_email">Email</label>
+          <div class="input-wrapper">
+            <input id="author_email" name="author_email" type="email" class="input" required spellcheck="false"
+              autocomplete="off" value="{{review.author_email}}">
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="main__wrapper">
+    <div class="padding-left padding-right padding-top padding-bottom">
+      <div class="field">
+        <label class="label" for="name">Review title</label>
+        <div class="input-wrapper">
+          <input id="name" name="name" type="text" class="input" required spellcheck="false" autocomplete="off"
+            value="{{review.name}}">
+        </div>
+      </div>
+      <div class="field">
+        <label class="label" for="rating_value">Rating</label>
+        <div class="input-wrapper">
+          <input id="rating_value" name="rating_value" type="number" step="any" class="input" required
+            spellcheck="false" autocomplete="off" value="{{review.rating_value}}">
+        </div>
+      </div>
+      <div class="field">
+        <label class="label" for="description">Review</label>
+        <div class="input-wrapper">
+          <textarea id="description" name="description" class="textarea" required>{{review.description}}</textarea>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label" for="status">Status</label>
+        <div class="input-wrapper">
+          <input id="status" name="status" type="text" class="input" required spellcheck="false" autocomplete="off"
+            value="{{review.status}}">
+          <p class="help">confirmed, pending</p>
+        </div>
+      </div>
+      <button class="button is-primary full-width" type="submit">Save <i class="fa fa-save"
+          aria-hidden="true"></i></button>
+      </form>
+    </div>
+  </div>
+</section>

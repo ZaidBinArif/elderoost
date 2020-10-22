@@ -1,0 +1,37 @@
+<section class="main main-text-wrapper">
+  <div class="main__wrapper-purple padding-left padding-right">
+    <h1 class="main__wrapper-purple__text">Profile
+    </h1>
+  </div>
+  <div class="main__wrapper main__negative-top-margin">
+    <div class="padding-left padding-right padding-top padding-bottom">
+      <form action="/users/profile" method="POST">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <div class="field">
+          <label class="label" for="username">Username</label>
+          <div class="input-wrapper">
+            <input id="username" name="username" type="text" class="input" required spellcheck="false"
+              autocomplete="off" value={{user.username}}>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="email">Email</label>
+          <div class="input-wrapper">
+            <input id="email" name="email" type="email" class="input" required spellcheck="false" autocomplete="off"
+              value={{user.email}} readonly>
+            <p class="help">Your email cannot be changed. Please contact us to do that.</p>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="password">Password</label>
+          <div class="input-wrapper">
+            <input id="password" name="password" type="password" class="input" required spellcheck="false"
+              autocomplete="off">
+          </div>
+        </div>
+        <button class="button is-primary full-width" type="submit">Save <i class="fa fa-save"
+            aria-hidden="true"></i></button>
+      </form>
+    </div>
+  </div>
+</section>

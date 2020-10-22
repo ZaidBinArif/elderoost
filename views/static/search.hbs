@@ -1,0 +1,48 @@
+<section class="main main-text-wrapper">
+  <div class="main__wrapper-purple padding-left padding-right">
+    <h1 class="main__wrapper-purple__text"><i class="fa fa-search" aria-hidden="true"></i> Search residences</h1>
+  </div>
+  <div class="main__wrapper main__negative-top-margin">
+    <div class="padding-left padding-right padding-top padding-bottom">
+      <form action="/search" method="POST">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <div class="field">
+          <label class="label" for="search">Search</label>
+          <div class="input-wrapper">
+            <input id="search" name="search" type="text" class="input" required spellcheck="false" autocomplete="off">
+            <p class="help">Search residences by name or address</p>
+          </div>
+        </div>
+        <button class="button is-primary full-width" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+  {{#if residences}}
+  <div class="main__wrapper">
+    <table class="padding-left padding-right padding-bottom">
+      <caption class="padding-top">Residences based on search : {{search}}</caption>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">City</th>
+        <th scope="col">Province</th>
+      </tr>
+      {{#each residences as |residence|}}
+      <tr>
+        <th scope="row"><a href="/residences/{{slug}}?ref=search" class="main__wrapper__link">{{name}}</a></th>
+        <td>{{address_city}}</td>
+        <td>{{address_state}}</td>
+      </tr>
+      {{/each}}
+    </table>
+  </div>
+  {{/if}}
+  <div class="main__wrapper">
+    <div class="padding-left padding-right padding-bottom">
+      <div class="heading">
+        <h2>Are we missing a residence?</h2>
+      </div>
+      <a href="/residences/suggest-new?ref=search" rel="nofollow" class="button button__wrapper__a-remove-underline"
+        aria-label="Add a missing residence" title="Add a Residence">Suggest a missing residence</a>
+    </div>
+  </div>
+</section>

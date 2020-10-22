@@ -1,0 +1,30 @@
+<section class="main main-text-wrapper">
+  <div class="main__wrapper-purple padding-left padding-right">
+    <h1 class="main__wrapper-purple__text">Administrative Dashboard : Reviews
+    </h1>
+  </div>
+  <div class="main__wrapper main__negative-top-margin">
+    <table class="padding-left padding-right padding-bottom">
+      <caption class="padding-top">Reviews</caption>
+      <tr>
+        <th scope="col">Residence</th>
+        <th scope="col">Title</th>
+        <th scope="col">Rating</th>
+        <th scope="col">Description</th>
+        <th scope="col">Status</th>
+        <th scope="col">Controls</th>
+      </tr>
+      {{#each reviews as |review|}}
+      <tr>
+        <th scope="row"><a href="/residences/{{residence.slug}}?ref=admin"
+            class="main__wrapper__link">{{residence.name}}</a></th>
+        <td>{{name}}</td>
+        <td>{{rating_value}}</td>
+        <td>{{description}}</td>
+        <td>{{status}}</td>
+        <td><a class="main__wrapper__link" rel="nofollow" href="/dashboard/reviews/{{id}}">Edit</a></td>
+      </tr>
+      {{/each}}
+    </table>
+  </div>
+</section>

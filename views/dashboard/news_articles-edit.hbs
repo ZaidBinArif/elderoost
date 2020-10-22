@@ -1,0 +1,61 @@
+<section class="main main-text-wrapper">
+  <div class="main__wrapper-purple padding-left padding-right">
+    <h1 class="main__wrapper-purple__text">Editing <a href="/residences/{{news_article.residence.slug}}?ref=admin-edit"
+        class="main__infobox__link">{{news_article.residence.name}}</a> News Article</a>
+    </h1>
+  </div>
+  <div class="main__wrapper main__negative-top-margin">
+    <div class="padding-left padding-right padding-top padding-bottom">
+      <p style="text-align:center;">
+        <a href="/dashboard/news_articles/{{news_article.id}}/delete"
+          class="button button__wrapper__a-remove-underline">Delete Article</a>
+      </p>
+    </div>
+  </div>
+  <div class="main__wrapper">
+    <div class="padding-left padding-right padding-top padding-bottom">
+      <form action="/dashboard/news_articles/{{news_article.id}}" method="POST">
+        <div class="field">
+          <label class="label" for="author_names">Authors</label>
+          <div class="input-wrapper">
+            <input id="author_names" name="author_names" type="text" class="input" required spellcheck="false"
+              autocomplete="off" value="{{news_article.author_names}}">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="headline">Headline</label>
+          <div class="input-wrapper">
+            <input id="headline" name="headline" type="text" class="input" required spellcheck="false"
+              autocomplete="off" value="{{news_article.headline}}">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="publisher">Publisher</label>
+          <div class="input-wrapper">
+            <input id="publisher" name="publisher" type="text" class="input" required spellcheck="false"
+              autocomplete="off" value="{{news_article.publisher}}">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="url">URL</label>
+          <div class="input-wrapper">
+            <input id="url" name="url" type="text" class="input" required spellcheck="false" autocomplete="off"
+              value="{{news_article.url}}">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="status">Status</label>
+          <div class="input-wrapper">
+            <input id="status" name="status" type="text" class="input" required spellcheck="false" autocomplete="off"
+              value="{{news_article.status}}">
+            <p class="help">confirmed, pending</p>
+          </div>
+        </div>
+        <input id="residence_id" name="residence_id" type="hidden" required spellcheck="false" autocomplete="off"
+          value="{{news_article.residence.slug}}">
+        <button class="button is-primary full-width" type="submit">Save <i class="fa fa-save"
+            aria-hidden="true"></i></button>
+      </form>
+    </div>
+  </div>
+</section>
